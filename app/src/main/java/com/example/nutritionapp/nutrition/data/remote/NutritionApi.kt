@@ -12,8 +12,7 @@ import retrofit2.http.Query
 interface NutritionApi {
     @GET("nutrition/get")
     suspend fun getNutrition(
-        @Query("query") query: String,
-        @Header("token") token: String
+        @Query("q") query: String
     ): WorkResult<List<NutritionDto>>
 
     @PUT("nutrition/update")
