@@ -33,6 +33,7 @@ data class NutritionDto(
 ) {
     fun toDomain(): Nutrition {
         return Nutrition(
+            id,
             name,
             calories.toString(),
             servingSize.toString(),
