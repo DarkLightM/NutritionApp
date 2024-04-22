@@ -1,16 +1,15 @@
 package com.example.nutritionapp.nutrition.presentation
 
-import androidx.lifecycle.ViewModelProvider
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.nutritionapp.R
 import com.example.nutritionapp.base.presentation.BaseFragment
+import com.example.nutritionapp.base.utils.navigate
 import com.example.nutritionapp.databinding.FragmentNutritionBinding
+import com.example.nutritionapp.nutrition.domain.model.Nutrition
+import com.example.nutritionapp.nutrition.presentation.adapter.NutritionAdapter
 import com.example.nutritionapp.nutrition.presentation.model.NutritionEffect
 import com.example.nutritionapp.nutrition.presentation.model.NutritionState
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,6 +20,18 @@ class NutritionFragment :
 
     private val binding by viewBinding(FragmentNutritionBinding::bind)
     override val viewModel by viewModels<NutritionViewModel>()
+
+    private val adapter by lazy {
+        NutritionAdapter {
+            viewModel.handleNutritionEvents(it)
+        }
+    }
+
+    override fun setupView() = with(binding) {
+        val layoutManager = GridLayoutManager(requireContext(), 2)
+        nutrition.layoutManager = layoutManager
+    }
+
 
     override fun setupListeners() = with(binding) {
         search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -36,7 +47,21 @@ class NutritionFragment :
     }
 
     override fun renderState(state: NutritionState) = with(binding) {
-        result.text = state.nutrition.toString()
+        setupAdapter(state.nutrition)
+    }
+
+    override fun reactToSideEffect(effect: NutritionEffect) {
+        when (effect) {
+            is NutritionEffect.NutritionLoadFailed -> {}
+            is NutritionEffect.OpenNutrition -> {
+                navigate(R.id.nutritionInfoFragment)
+            }
+        }
+    }
+
+    private fun setupAdapter(list: List<Nutrition>) = with(binding) {
+        adapter.submitList(list)
+        nutrition.adapter = adapter
     }
 
 

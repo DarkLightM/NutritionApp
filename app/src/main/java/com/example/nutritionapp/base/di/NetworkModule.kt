@@ -18,7 +18,7 @@ object NetworkModule {
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://nutritionapi-ami6.onrender.com/")
+            .baseUrl("https://nutritionapi-mpla.onrender.com/")
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(ResultAdapterFactory())

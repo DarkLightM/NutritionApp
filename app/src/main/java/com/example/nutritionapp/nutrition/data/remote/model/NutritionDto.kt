@@ -4,6 +4,8 @@ import com.example.nutritionapp.nutrition.domain.model.Nutrition
 import com.google.gson.annotations.SerializedName
 
 data class NutritionDto(
+    @SerializedName("id")
+    val id: Int = -1,
     @SerializedName("name")
     val name: String,
     @SerializedName("calories")

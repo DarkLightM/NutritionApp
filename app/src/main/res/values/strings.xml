@@ -16,4 +16,11 @@
     <string name="home">Главный</string>
     <string name="add_food">Добавить</string>
     <string name="profile">Профиль</string>
+
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+
+    <string name="calories">%1$s ккал</string>
+    <string name="grams">%1$s гр</string>
+    <string name="isDoctor">Я врач</string>
 </resources>

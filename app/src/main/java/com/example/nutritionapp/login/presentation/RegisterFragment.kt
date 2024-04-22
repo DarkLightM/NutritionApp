@@ -4,7 +4,6 @@ import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.nutritionapp.R
 import com.example.nutritionapp.base.presentation.BaseFragment
-import com.example.nutritionapp.base.utils.navigate
 import com.example.nutritionapp.base.utils.navigateUp
 import com.example.nutritionapp.databinding.FragmentRegisterBinding
 import com.example.nutritionapp.login.presentation.model.RegisterEffect
@@ -16,9 +15,14 @@ class RegisterFragment : BaseFragment<RegisterState, RegisterEffect>(R.layout.fr
     private val binding by viewBinding(FragmentRegisterBinding::bind)
     override val viewModel by viewModels<RegisterViewModel>()
 
-    override fun setupListeners() = with(binding){
-        register.setOnClickListener{
-            viewModel.register(username.toString(), email.toString(), password.toString())
+    override fun setupListeners() = with(binding) {
+        register.setOnClickListener {
+            viewModel.register(
+                username.toString(),
+                email.toString(),
+                password.toString(),
+                if (isDoctor.isChecked) "d" else "p"
+            )
         }
     }
 
