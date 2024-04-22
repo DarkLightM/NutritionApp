@@ -1,11 +1,11 @@
 package com.example.nutritionapp.login.presentation
 
 import android.content.SharedPreferences
-import android.util.Log
 import androidx.core.content.edit
 import androidx.lifecycle.viewModelScope
 import com.example.nutritionapp.base.domain.handle
 import com.example.nutritionapp.base.presentation.BaseViewModel
+import com.example.nutritionapp.login.data.remote.model.AuthDto
 import com.example.nutritionapp.login.domain.AuthUseCase
 import com.example.nutritionapp.login.presentation.model.AuthEffect
 import com.example.nutritionapp.login.presentation.model.AuthState
@@ -23,14 +23,14 @@ class AuthViewModel @Inject constructor(
     BaseViewModel<AuthState, AuthEffect>(AuthState()) {
     fun auth(email: String, password: String) {
         viewModelScope.launch {
-            authUseCase(email, password).handle(
+            authUseCase(AuthDto(email, password)).handle(
                 onSuccess = { token ->
-                    Log.d("My log", token.accessToken)
-                    sharedPreferences.edit { putString("token", token.accessToken) }
+                    sharedPreferences.edit { putString("token", token.token) }
                     sendEffect(AuthEffect.AuthSuccess)
                 },
-                onNotSuccess = { error -> Log.d("My log", error.toString())
-                    sendEffect(AuthEffect.AuthFail) }
+                onNotSuccess = {
+                    sendEffect(AuthEffect.AuthFail)
+                }
             )
         }
     }

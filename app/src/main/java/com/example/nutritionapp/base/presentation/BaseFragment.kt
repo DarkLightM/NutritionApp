@@ -16,6 +16,7 @@ abstract class BaseFragment<S : UiState, E : UiEffect> (@LayoutRes layoutId: Int
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupView()
         setupListeners()
         observeFlow(viewModel.state, ::renderState)
         observeFlow(viewModel.events, ::reactToSideEffect)
@@ -28,5 +29,6 @@ abstract class BaseFragment<S : UiState, E : UiEffect> (@LayoutRes layoutId: Int
     }
 
     protected open fun setupListeners() = Unit
+    protected open fun setupView() = Unit
 
 }

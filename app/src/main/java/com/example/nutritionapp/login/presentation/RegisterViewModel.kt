@@ -15,14 +15,13 @@ import javax.inject.Inject
 class RegisterViewModel @Inject constructor(private val registerUseCase: RegisterUseCase) :
     BaseViewModel<RegisterState, RegisterEffect>(RegisterState()) {
 
-    fun register(username: String, email: String, password: String) {
+    fun register(username: String, email: String, password: String, role: String) {
         viewModelScope.launch {
-            registerUseCase(RegisterDto(email, username, password)).handle(
+            registerUseCase(RegisterDto(email, username, password, role)).handle(
                 onSuccess = { result ->
                     sendEffect(
                         RegisterEffect.RegisterSuccess(
-                            result.email,
-                            result.password
+                            result.token
                         )
                     )
                 },
