@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.nutritionapp.R
 import com.example.nutritionapp.base.presentation.BaseFragment
-import com.example.nutritionapp.base.utils.navigate
 import com.example.nutritionapp.databinding.FragmentNutritionBinding
 import com.example.nutritionapp.nutrition.domain.model.Nutrition
 import com.example.nutritionapp.nutrition.presentation.adapter.NutritionAdapter
@@ -23,7 +22,7 @@ class NutritionFragment :
 
     private val adapter by lazy {
         NutritionAdapter {
-            viewModel.handleNutritionEvents(it)
+
         }
     }
 
@@ -31,6 +30,7 @@ class NutritionFragment :
         val layoutManager = GridLayoutManager(requireContext(), 2)
         nutrition.layoutManager = layoutManager
     }
+
 
 
     override fun setupListeners() = with(binding) {
@@ -44,6 +44,9 @@ class NutritionFragment :
 
             override fun onQueryTextChange(newText: String?): Boolean = false
         })
+        saveButton.setOnClickListener{
+            viewModel.saveMeal()
+        }
     }
 
     override fun renderState(state: NutritionState) = with(binding) {
@@ -53,9 +56,6 @@ class NutritionFragment :
     override fun reactToSideEffect(effect: NutritionEffect) {
         when (effect) {
             is NutritionEffect.NutritionLoadFailed -> {}
-            is NutritionEffect.OpenNutrition -> {
-                navigate(R.id.nutritionInfoFragment)
-            }
         }
     }
 

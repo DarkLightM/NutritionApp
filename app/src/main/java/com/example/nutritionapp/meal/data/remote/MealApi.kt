@@ -5,11 +5,14 @@ import com.example.nutritionapp.base.domain.WorkResult
 import com.example.nutritionapp.meal.data.remote.model.MealDto
 import retrofit2.http.Body
 import retrofit2.http.DELETE
+import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface MealApi {
+    @GET("meal/{id}")
+    suspend fun getMeal(@Path("id") id: Int, @Header("token") token: String): WorkResult<MealDto>
     @POST("meal/insert")
     suspend fun insertMeal(@Body mealDto: MealDto, @Header("token") token: String): WorkResult<MealDto>
 

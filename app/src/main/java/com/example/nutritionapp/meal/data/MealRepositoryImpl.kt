@@ -17,6 +17,10 @@ class MealRepositoryImpl @Inject constructor(
     private val sharedPreferences: SharedPreferences, private val mealApi: MealApi
 ) : MealRepository {
     private val token = sharedPreferences.getToken()
+    override suspend fun getMeal(id: Int): WorkResult<Meal> {
+        return mealApi.getMeal(id, token).map { it.toDomain() }
+    }
+
     override suspend fun insertMeal(meal: Meal): WorkResult<Meal> {
         return mealApi.insertMeal(meal.fromDomain(), token)
             .map { it.toDomain() }

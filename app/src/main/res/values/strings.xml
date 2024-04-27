@@ -23,4 +23,8 @@
     <string name="calories">%1$s ккал</string>
     <string name="grams">%1$s гр</string>
     <string name="isDoctor">Я врач</string>
+    <string name="diary_header">Дневник приемов пищи</string>
+    <string name="nutrition">Состав блюда\n%1$s</string>
+    <string name="save">Сохранить</string>
+    <string name="serving_size_hint">Введите новый размер порции</string>
 </resources>

@@ -1,32 +1,56 @@
 package com.example.nutritionapp.meal.presentation
 
-import androidx.lifecycle.ViewModelProvider
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.nutritionapp.R
+import com.example.nutritionapp.base.presentation.BaseFragment
+import com.example.nutritionapp.base.utils.navigateUp
+import com.example.nutritionapp.databinding.FragmentMealBinding
+import com.example.nutritionapp.meal.presentation.model.MealEffect
+import com.example.nutritionapp.meal.presentation.model.MealState
+import com.example.nutritionapp.nutrition.domain.model.Nutrition
+import com.example.nutritionapp.nutrition.presentation.adapter.NutritionAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
-class MealFragment : Fragment() {
+@AndroidEntryPoint
+class MealFragment : BaseFragment<MealState, MealEffect>(R.layout.fragment_meal) {
+    private val binding by viewBinding(FragmentMealBinding::bind)
+    override val viewModel by viewModels<MealViewModel>()
 
-    companion object {
-        fun newInstance() = MealFragment()
+    private val adapter by lazy {
+        NutritionAdapter(isEditable = true) {
+            viewModel.updateNutrition(it)
+        }
     }
 
-    private lateinit var viewModel: MealViewModel
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_meal, container, false)
+    override fun setupView() {
+        arguments?.let {
+            val mealId = it.getInt("parameter")
+            viewModel.loadMeal(mealId)
+        }
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MealViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun setupListeners() = with(binding) {
+        delete.setOnClickListener {
+            viewModel.deleteMeal()
+        }
     }
+
+    override fun renderState(state: MealState) = with(binding) {
+        mealName.text = getString(R.string.nutrition, state.name)
+        setupAdapter(state.food)
+    }
+
+    private fun setupAdapter(list: List<Nutrition>) = with(binding) {
+        adapter.submitList(list)
+        mealRecycler.adapter = adapter
+    }
+
+    override fun reactToSideEffect(effect: MealEffect) {
+        when (effect) {
+            MealEffect.DeleteMealSuccess -> navigateUp()
+        }
+    }
+
 
 }

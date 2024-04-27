@@ -25,6 +25,7 @@
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home">
         <deepLink app:uri="com.example.nutritionapp.home.presentation.home-fragment" />
+
     </fragment>
     <fragment
         android:id="@+id/addFoodFragment"
@@ -41,4 +42,19 @@
         android:name="com.example.nutritionapp.nutrition_info.NutritionInfoFragment"
         android:label="fragment_nutrition_info"
         tools:layout="@layout/fragment_nutrition_info" />
+    <fragment
+        android:id="@+id/diaryFragment"
+        android:name="com.example.nutritionapp.diary.presentation.DiaryFragment"
+        android:label="fragment_diary"
+        tools:layout="@layout/fragment_diary" />
+    <fragment
+        android:id="@+id/mealFragment"
+        android:name="com.example.nutritionapp.meal.presentation.MealFragment"
+        android:label="fragment_meal"
+        tools:layout="@layout/fragment_meal" />
+    <fragment
+        android:id="@+id/nutritionistFragment"
+        android:name="com.example.nutritionapp.nutritionist.presentation.NutritionistFragment"
+        android:label="fragment_nutritionist"
+        tools:layout="@layout/fragment_nutritionist" />
 </navigation>

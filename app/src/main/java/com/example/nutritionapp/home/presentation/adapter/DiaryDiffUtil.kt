@@ -1,13 +1,12 @@
-package com.example.nutritionapp.nutrition.presentation.adapter
+package com.example.nutritionapp.home.presentation.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.nutritionapp.nutrition.domain.model.Nutrition
+import com.example.nutritionapp.meal.domain.model.Meal
 
-class NutritionDiffUtil (
-    private val oldList: List<Nutrition>,
-    private val newList: List<Nutrition>
-) : DiffUtil.Callback() {
-
+class DiaryDiffUtil(
+    private val oldList: List<Meal>,
+    private val newList: List<Meal>
+) : DiffUtil.Callback(){
     override fun getOldListSize(): Int {
         return oldList.size
     }

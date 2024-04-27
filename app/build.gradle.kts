@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.nutritionapp"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -90,6 +90,8 @@ dependencies {
 
     //Crypto
     implementation("androidx.security:security-crypto:1.1.0-alpha06")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0-RC")
 }
 kapt {
     correctErrorTypes = true

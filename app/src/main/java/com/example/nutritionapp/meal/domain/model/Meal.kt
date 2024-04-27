@@ -2,6 +2,7 @@ package com.example.nutritionapp.meal.domain.model
 
 import com.example.nutritionapp.meal.data.remote.model.MealDto
 import com.example.nutritionapp.nutrition.domain.model.Nutrition
+import kotlinx.serialization.Serializable
 
 data class Meal(
     val id: Int,

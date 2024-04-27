@@ -1,34 +1,36 @@
 package com.example.nutritionapp.home.presentation
 
-import androidx.lifecycle.ViewModelProvider
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.fragment.app.viewModels
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.nutritionapp.R
+import com.example.nutritionapp.base.presentation.BaseFragment
+import com.example.nutritionapp.base.utils.navigate
+import com.example.nutritionapp.databinding.FragmentHomeBinding
+import com.example.nutritionapp.home.presentation.adapter.DiaryAdapter
+import com.example.nutritionapp.home.presentation.model.HomeEffect
+import com.example.nutritionapp.home.presentation.model.HomeState
+import com.example.nutritionapp.meal.domain.model.Meal
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment<HomeState, HomeEffect>(R.layout.fragment_home) {
+    private val binding by viewBinding(FragmentHomeBinding::bind)
+    override val viewModel by viewModels<HomeViewModel>()
 
-    companion object {
-        fun newInstance() = HomeFragment()
+    private val adapter by lazy {
+        DiaryAdapter { mealId ->
+            val args = bundleOf("parameter" to mealId)
+            navigate(R.id.mealFragment, args)
+        }
     }
 
-    private lateinit var viewModel: HomeViewModel
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+    override fun renderState(state: HomeState) {
+        setupAdapter(state.mealList)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-        // TODO: Use the ViewModel
+    private fun setupAdapter(list: List<Meal>) = with(binding) {
+        adapter.submitList(list)
+        mealList.adapter = adapter
     }
-
 }

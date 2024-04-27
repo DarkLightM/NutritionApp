@@ -54,7 +54,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email" />
 
-    <RadioButton
+    <CheckBox
         android:id="@+id/isDoctor"
         android:layout_width="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/password"
@@ -71,7 +71,6 @@
         android:layout_gravity="start"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="64dp"
-        android:enabled="false"
         android:text="@string/action_register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
