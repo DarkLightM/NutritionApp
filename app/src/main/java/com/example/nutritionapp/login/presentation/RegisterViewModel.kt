@@ -17,7 +17,7 @@ class RegisterViewModel @Inject constructor(private val registerUseCase: Registe
 
     fun register(username: String, email: String, password: String, role: String) {
         viewModelScope.launch {
-            registerUseCase(RegisterDto(email, username, password, role)).handle(
+            registerUseCase(RegisterDto(username, email, password, role)).handle(
                 onSuccess = { result ->
                     sendEffect(
                         RegisterEffect.RegisterSuccess(

@@ -18,9 +18,9 @@ class RegisterFragment : BaseFragment<RegisterState, RegisterEffect>(R.layout.fr
     override fun setupListeners() = with(binding) {
         register.setOnClickListener {
             viewModel.register(
-                username.toString(),
-                email.toString(),
-                password.toString(),
+                username.text.toString(),
+                email.text.toString(),
+                password.text.toString(),
                 if (isDoctor.isChecked) "d" else "p"
             )
         }
