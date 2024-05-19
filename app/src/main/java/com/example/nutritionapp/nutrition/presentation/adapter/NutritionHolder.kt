@@ -9,6 +9,7 @@ import com.example.nutritionapp.base.utils.toList
 import com.example.nutritionapp.databinding.CardProductBinding
 import com.example.nutritionapp.nutrition.domain.model.Nutrition
 import com.example.nutritionapp.nutrition.domain.model.UpdateNutrition
+import java.util.Locale
 
 class NutritionHolder(
     private val binding: CardProductBinding,
@@ -16,7 +17,7 @@ class NutritionHolder(
     private val clickCallBack: (UpdateNutrition) -> Unit
 ) : BaseViewHolder(binding) {
     fun bind(data: Nutrition) = with(binding) {
-        name.text = data.name
+        name.text = data.name.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
         nutrition.text = data.toList().joinToString("\n")
         editServingSize.isVisible = isEditable
         onEditorListener(data.id)

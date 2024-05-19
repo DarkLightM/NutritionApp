@@ -33,8 +33,8 @@
         android:label="fragment_add_food"
         tools:layout="@layout/fragment_nutrition" />
     <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.example.nutritionapp.profile.ProfileFragment"
+        android:id="@+id/settingsFragment"
+        android:name="com.example.nutritionapp.profile.presentation.SettingsFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment

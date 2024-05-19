@@ -4,13 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_bcg"
     android:orientation="vertical"
     tools:context=".nutrition.presentation.NutritionFragment">
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search"
+        android:background="@drawable/edittext_border"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/fragment_default_margin"
         android:layout_marginHorizontal="16dp" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -26,7 +29,7 @@
         android:id="@+id/save_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/save"
-        android:layout_margin="@dimen/fragment_default_margin"/>
+        android:layout_margin="@dimen/fragment_default_margin"
+        android:text="@string/save" />
 
 </LinearLayout>

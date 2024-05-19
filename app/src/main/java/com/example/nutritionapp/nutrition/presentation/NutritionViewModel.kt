@@ -33,4 +33,8 @@ class NutritionViewModel @Inject constructor(
             onNotSuccess = {}
         )
     }
+
+    fun haveStateToSave(): Boolean {
+        return state.value.nutrition.isNotEmpty()
+    }
 }

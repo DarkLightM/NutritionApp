@@ -3,7 +3,7 @@ package com.example.nutritionapp.nutrition.presentation.adapter
 import androidx.recyclerview.widget.DiffUtil
 import com.example.nutritionapp.nutrition.domain.model.Nutrition
 
-class NutritionDiffUtil (
+class NutritionDiffUtil(
     private val oldList: List<Nutrition>,
     private val newList: List<Nutrition>
 ) : DiffUtil.Callback() {
@@ -17,7 +17,8 @@ class NutritionDiffUtil (
     }
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldList[oldItemPosition].id == newList[newItemPosition].id
+        return oldList[oldItemPosition].id == newList[newItemPosition].id &&
+                oldList[oldItemPosition].servingSize == newList[newItemPosition].servingSize
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {

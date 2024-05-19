@@ -25,12 +25,17 @@ class HomeFragment : BaseFragment<HomeState, HomeEffect>(R.layout.fragment_home)
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getUserDiary()
+    }
+
     override fun renderState(state: HomeState) {
         setupAdapter(state.mealList)
     }
 
     private fun setupAdapter(list: List<Meal>) = with(binding) {
-        adapter.submitList(list)
+        adapter.submitList(list.reversed())
         mealList.adapter = adapter
     }
 }

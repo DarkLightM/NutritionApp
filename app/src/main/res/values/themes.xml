@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Theme.NutritionApp" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Основной цвет -->
+        <item name="colorPrimary">@color/primary_color</item>
+        <!-- Темный оттенок основного цвета -->
+        <item name="colorPrimaryDark">@color/primary_color_dark</item>
+        <!-- Цвет всплывающих элементов (например, всплывающие кнопки, выделение текста и т. д.) -->
+        <item name="colorAccent">@color/secondary_color</item>
         <!-- Дополнительные настройки вашей темы -->
     </style>
 </resources>

@@ -51,6 +51,7 @@ class NutritionFragment :
 
     override fun renderState(state: NutritionState) = with(binding) {
         setupAdapter(state.nutrition)
+        saveButton.isEnabled = viewModel.haveStateToSave()
     }
 
     override fun reactToSideEffect(effect: NutritionEffect) {
