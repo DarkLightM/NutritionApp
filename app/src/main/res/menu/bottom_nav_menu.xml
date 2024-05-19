@@ -9,8 +9,8 @@
         android:icon="@drawable/baseline_add_24"
         android:title="@string/add_food" />
     <item
-        android:id="@+id/profileFragment"
-        android:icon="@drawable/baseline_account_circle_24"
-        android:title="@string/profile" />
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/settings" />
 
 </menu>

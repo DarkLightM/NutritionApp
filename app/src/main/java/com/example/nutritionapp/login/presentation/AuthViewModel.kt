@@ -11,6 +11,7 @@ import com.example.nutritionapp.login.presentation.model.AuthEffect
 import com.example.nutritionapp.login.presentation.model.AuthState
 import com.example.nutritionapp.sharedprefs.model.SharedPrefs
 import com.example.nutritionapp.sharedprefs.model.SharedPrefsType
+import com.example.nutritionapp.sharedprefs.utils.getToken
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -21,11 +22,18 @@ class AuthViewModel @Inject constructor(
     private val authUseCase: AuthUseCase
 ) :
     BaseViewModel<AuthState, AuthEffect>(AuthState()) {
+    init {
+        updateState { it.copy(token = sharedPreferences.getToken()) }
+    }
+
+    val token = state.value.token
+
     fun auth(email: String, password: String) {
         viewModelScope.launch {
             authUseCase(AuthDto(email, password)).handle(
-                onSuccess = { token ->
-                    sharedPreferences.edit { putString("token", token.token) }
+                onSuccess = { userInfo ->
+                    sharedPreferences.edit { putString("token", userInfo.token) }
+                    updateState { it.copy(role = userInfo.role) }
                     sendEffect(AuthEffect.AuthSuccess)
                 },
                 onNotSuccess = {

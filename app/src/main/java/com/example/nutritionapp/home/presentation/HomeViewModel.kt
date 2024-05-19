@@ -19,7 +19,7 @@ class HomeViewModel @Inject constructor(private val getDiaryUseCase: GetDiaryUse
         getUserDiary()
     }
 
-    private fun getUserDiary() = viewModelScope.launch {
+    fun getUserDiary() = viewModelScope.launch {
         getDiaryUseCase().handle(
             onSuccess = { diary -> updateState { it.copy(mealList = diary.mealList) } },
             onNotSuccess = {}

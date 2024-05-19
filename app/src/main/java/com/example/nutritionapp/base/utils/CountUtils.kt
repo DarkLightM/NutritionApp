@@ -2,10 +2,10 @@ package com.example.nutritionapp.base.utils
 
 import com.example.nutritionapp.meal.domain.model.Meal
 
-fun Meal.countCalories(): Float {
+fun Meal.countCalories(): String {
     var result = 0F
     this.food.forEach {
         result += it.calories.toFloat()
     }
-    return result
+    return String.format("%.1f", result)
 }

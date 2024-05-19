@@ -39,7 +39,7 @@ class MealViewModel @Inject constructor(
 
     fun updateNutrition(updateNutrition: UpdateNutrition) = viewModelScope.launch {
         updateNutritionUseCase(updateNutrition).handle(
-            onSuccess = { loadMeal(it.id) },
+            onSuccess = { loadMeal(state.value.id   ) },
             onNotSuccess = {}
         )
     }

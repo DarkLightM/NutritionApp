@@ -34,6 +34,9 @@ class MealFragment : BaseFragment<MealState, MealEffect>(R.layout.fragment_meal)
         delete.setOnClickListener {
             viewModel.deleteMeal()
         }
+        backArrow.setOnClickListener {
+            navigateUp()
+        }
     }
 
     override fun renderState(state: MealState) = with(binding) {
